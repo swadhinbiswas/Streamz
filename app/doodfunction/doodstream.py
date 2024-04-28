@@ -75,7 +75,11 @@ class DoodStream:
         direct_link: str,
         fild_id: Optional[str] = None,
         file_name: Optional[str] = None,)->dict:
-        url = f"{self.base_url}/upload/remote?key={self.api_key}"
+        url = f"{self.base_url}upload/url?key={self.api_key}&direct_link={direct_link}"
+        if fild_id != None:
+            url += f"&file_id={fild_id}"
+        if file_name != None:
+            url += f"&file_name={file_name}"
         return self._req(url)
     
     def remote_upload_status(self,file_code:str)->dict:
